@@ -1,0 +1,34 @@
+.container {
+  width: 98vw;
+  height: 90vh;
+}
+
+.divForBackButton {
+  position: absolute;
+  bottom: 0.1vh;
+  left: 0;
+  background-color: rgba(78, 78, 80, 0.5); 
+  height: 7vh;
+  border-top: 2px solid black;
+  width: 99vw;
+}
+.buttonDiv{
+    color: orangered;
+    height: 6.5vh;
+    width: 8%;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: underline;
+    position: absolute;
+    right: 10vw;
+    border: none;
+    line-height: 6vh;
+    text-align: center;
+    z-index: 1;
+}
+.buttonDiv:hover{
+    font-weight: 900;
+    cursor: pointer;
+    background-color: rgba(251, 250, 246, 0.5);
+    margin-left: -1vw;
+}

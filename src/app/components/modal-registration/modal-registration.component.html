@@ -1,0 +1,92 @@
+<div class="container">
+  <div class="title" mat-dialog-title>REGISTRATION FORM</div>
+  <div class="upperUnderscore"></div>
+  <mat-dialog-content>
+    <form (ngSubmit)="onSubmit()" class="registration-form" [formGroup]="regisrtrationForm">
+      <div class="center">
+        <mat-form-field>
+          <div>
+            <input matInput color="primary" type="text" id="name" placeholder="FIRST NAME" formControlName="userName"
+            [pattern]="regForstring" required class="input">
+            <span
+            *ngIf="regisrtrationForm.controls['userName'].invalid && regisrtrationForm.controls['userName'].dirty">*only
+            letters and space between them</span>
+          </div>
+        </mat-form-field>
+        <mat-form-field>
+          <div>
+            <input matInput type="text" id="surname" placeholder="SECOND NAME" formControlName="userSurname"
+            [pattern]="regForstring" required>
+            <span
+            *ngIf="regisrtrationForm.controls['userSurname'].invalid && regisrtrationForm.controls['userSurname'].dirty">*only
+            letters and space between them</span>
+          </div>
+        </mat-form-field>
+      </div>
+      <div class="center">
+        <mat-form-field>
+          <div>
+            <input matInput type="text" id="login" placeholder="LOGIN" formControlName="userLogin" [pattern]="regForlogin"
+            required (blur)="checkLoginRepeat()">
+            <span
+            *ngIf="regisrtrationForm.controls['userLogin'].invalid && regisrtrationForm.controls['userLogin'].dirty">*only
+            letters and numbers</span>
+          </div>
+        </mat-form-field>
+        <mat-form-field>
+          <div>
+            <input matInput type="mail" id="mail" placeholder="EMAIL" formControlName="userMail" [pattern]="regExpMail"
+            required>
+            <span
+            *ngIf="regisrtrationForm.controls['userMail'].invalid && regisrtrationForm.controls['userMail'].dirty">*wrong
+            email</span>
+          </div>
+        </mat-form-field>
+      </div>
+        <div class="center">
+          <mat-form-field>
+            <input matInput type="text" id="phone" placeholder="PHONE NUMBER" formControlName="userPhone"
+            [pattern]="regExpPhone" required>
+           <span *ngIf="regisrtrationForm.controls['userPhone'].invalid && regisrtrationForm.controls['userPhone'].dirty">*wrong phone number</span>
+          </mat-form-field>
+        </div>
+        <!-- <div class="radioForGender">GENDER</div>
+          <div>
+            <input type="radio" id="genderMan" name="gender" placeholder="type here...." value="man">
+            <label for="genderMan" formControlName="genderMan">MAN</label>
+            <input type="radio" id="genderWoman" name="gender" placeholder="type here...." value="woman" formControlName="genderWoman">
+            <label for="genderWoman">WOMAN</label>
+          </div> -->
+          <div class="center">
+            <mat-form-field>
+              <div>
+                <input matInput type="password" id="pass" placeholder="PASSWORD" formControlName="userPassword"
+                (change)="inputPasswordChange()" required >
+                <span *ngIf="regisrtrationForm.controls['userPassword'].touched && regisrtrationForm.controls['userPassword'].invalid">*wrong password</span>
+              </div>
+      </mat-form-field>
+      <mat-form-field>
+        <div>
+          <input matInput type="password" id="pass2" placeholder="CONFIRM PASSWORD" formControlName="userPass2"
+          required (blur)="confirmPassFunc()" >
+          <span *ngIf="regisrtrationForm.controls['userPass2'].invalid && regisrtrationForm.controls['userPass2'].touched" >*wrong confirm</span>
+        </div>
+      </mat-form-field>
+    </div>
+      <div class="passwordCheckers">Password checkers:
+        <div [class.vForCheck]="passwordLengthChecker" class="passwordLength check">Atleast 8 characters long</div>
+        <div [class.vForCheck]="passwordLowercaseChecker" class="lowercase check">Minimum one lowercase</div>
+        <div [class.vForCheck]="passwordUppercaseChecker" class="uppercase check">Minimum one uppercase</div>
+        <div [class.vForCheck]="passwordNumberChecker" class="number check">Minimum one number</div>
+        <div [class.vForCheck]="passwordSymbolChecker" class="symbol check">Minimum one special symbol</div>
+        <div [class.vForCheck]="passwordSpaceChecker" class="space check">No space</div>
+      </div>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <div class="divForButtons">
+      <button mat-button color="accent" [mat-dialog-close]="regisrtrationForm" cdkFocusInitial>CANCEL</button>
+      <button mat-raised-button type="submit" color="accent" (click)="addNewUser()" [disabled]="regisrtrationForm.invalid">SIGN UP</button>
+    </div>
+  </mat-dialog-actions>
+</div>

@@ -1,0 +1,25 @@
+.container {
+  background-color: black;
+  width: 100%;
+  height: 100%;
+}
+
+button {
+  background-color: #fff;
+  width: 30px;
+  height: 20px;
+}
+
+.newsContainer {
+  background-color: black;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+h1{
+  text-align: center;
+  color: white;
+  text-decoration: underline;
+  margin-top: 5vh;
+}

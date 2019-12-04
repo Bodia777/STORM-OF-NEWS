@@ -1,0 +1,45 @@
+@font-face { 
+    font-family: "Yeon Sung"; 
+    font-style: normal; 
+    font-weight:300; 
+    src: url("/assets/fonts/Yeon_Sung/YeonSung-Regular.ttf"); 
+  } 
+.divForButtons{ 
+    width: 50vw; 
+    min-height: 200px; 
+    height: 70vh; 
+    margin: 10vh auto; 
+    background-color: rgba(205, 205, 236, 0.5); 
+    padding: 10vh 3vw; 
+} 
+div{ 
+    text-align: center; 
+    margin: 10px 0; 
+} 
+.slogan{ 
+    font-family: "Yeon Sung"; 
+    font-style: normal; 
+    font-weight:300; 
+    margin-bottom: 2vh; 
+    font-size: 2.5vw; 
+} 
+.hello{ 
+    font-size: 5vw; 
+    color: white; 
+    text-shadow: 0 0 3px black; 
+} 
+button{
+    width: 140px;
+    height: 40px;
+    color:black;
+    border-radius: 5%;
+    background-color: white;
+}
+img{ 
+    position: absolute; 
+    width: 100vw;
+    // min-height: 350px;
+    height: 105vh; 
+    z-index: -1; 
+    top: -5vh;
+} 

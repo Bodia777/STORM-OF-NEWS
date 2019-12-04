@@ -1,0 +1,37 @@
+{
+  "userarr": [
+    {
+      "isLogin": false,
+      "userName": "qqq",
+      "userSurname": "qqq",
+      "userLogin": "qqq",
+      "userMail": "bkmet@gmail.com",
+      "userPhone": "0672485927",
+      "userPassword": "Qwerty123!",
+      "userPass2": "Qwerty123!",
+      "id": 1
+    },
+    {
+      "isLogin": false,
+      "userName": "qqq",
+      "userSurname": "qqq",
+      "userLogin": "Bodia777",
+      "userMail": "bkmet@gmail.com",
+      "userPhone": "0672485927",
+      "userPassword": "Qwerty123!",
+      "userPass2": "Qwerty123!",
+      "id": 2
+    },
+    {
+      "isLogin": false,
+      "userName": "Anastasiia",
+      "userSurname": "Kmet",
+      "userLogin": "Nastia",
+      "userMail": "bkmet@gmail.com",
+      "userPhone": "0672485927",
+      "userPassword": "Nastia8!",
+      "userPass2": "Nastia8!",
+      "id": 3
+    }
+  ]
+}

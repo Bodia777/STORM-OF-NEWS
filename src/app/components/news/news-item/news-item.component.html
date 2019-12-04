@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="title">{{itemNewsOne.title}}</div>
+    <div class="divForImg">
+        <img [src]="itemNewsOne.urlToImage" alt="" *ngIf="urlImageChecker">
+        <img src="/assets/img/noimage.png" alt="" *ngIf="!urlImageChecker">
+    </div>
+    <div class="author">Author: {{itemNewsOne.author}}</div>
+    <div>
+        <a routerLink="details/{{itemNewsOne.id}}">
+        <button mat-raised-button color="accent" (click)="findItemIdFunc()">More information</button>
+        </a>
+    </div>
+</div>

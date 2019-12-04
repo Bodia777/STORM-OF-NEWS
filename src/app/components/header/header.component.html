@@ -1,0 +1,13 @@
+<header> 
+    <div class="logo" [ngStyle]="{'background-image': 'url(/assets/icons/earth.png)'}">
+        <div> 
+            <h6>STORM OF NEWS</h6> 
+        </div> 
+    </div> 
+    <div class="hello">{{stormNewsService.hello}}</div>
+    <mat-nav-list class="navList">
+        <a mat-list-item class="navItem" [routerLink]="['registration']" routerLinkActive="classActive" (click)="logout()">{{stormNewsService.logIn}}</a>
+        <a mat-list-item class="navItem" [routerLink]="['news']" routerLinkActive="classActive">News</a>
+        <a mat-list-item class="navItem" [routerLink]="['about']" routerLinkActive="classActive">About</a>
+    </mat-nav-list>
+</header> 
