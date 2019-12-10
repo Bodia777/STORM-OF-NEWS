@@ -26,4 +26,4 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
-In this program I use json-server. First of all you should install jsom-server: npm install -g json-server. Than you should start json-server: json-server --watch db.json.
+In this program I use json-server. First of all you should install json-server: npm install -g json-server. Than you should start json-server: json-server --watch db.json.
