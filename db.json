@@ -1,37 +1,79 @@
 {
   "userarr": [
     {
-      "isLogin": false,
-      "userName": "qqq",
+      "id": 1,
+      "userLogin": "abc",
+      "userName": "def",
+      "userMail": "bkmet@gmail.com",
+      "userPhone": "0672485927",
+      "userPass2": "Qwerty123!",
+      "userPassword": "Qwerty123!",
       "userSurname": "qqq",
+      "isLogin": false,
+      "userGender": "MAIL"
+    },
+    {
+      "id": 2,
       "userLogin": "qqq",
+      "userName": "def",
       "userMail": "bkmet@gmail.com",
       "userPhone": "0672485927",
-      "userPassword": "Qwerty123!",
       "userPass2": "Qwerty123!",
-      "id": 1
+      "userPassword": "Qwerty123!",
+      "userSurname": "qqq",
+      "isLogin": true,
+      "userGender": "MAN"
     },
     {
       "isLogin": false,
       "userName": "qqq",
       "userSurname": "qqq",
-      "userLogin": "Bodia777",
+      "userLogin": "qqw",
       "userMail": "bkmet@gmail.com",
+      "userGender": "WOMAN",
       "userPhone": "0672485927",
       "userPassword": "Qwerty123!",
       "userPass2": "Qwerty123!",
-      "id": 2
+      "id": 3
+    },
+    {
+      "isLogin": true,
+      "userName": "Bogdan",
+      "userSurname": "qqq",
+      "userLogin": "Qwe",
+      "userMail": "bkmet@gmail.com",
+      "userGender": "WOMAN",
+      "userPhone": "0672485927",
+      "userPassword": "Qwerty123!",
+      "userPass2": "Qwerty123!",
+      "firstLogin": false,
+      "id": 4
+    },
+    {
+      "isLogin": true,
+      "userName": "Olena",
+      "userSurname": "Hohoho",
+      "userLogin": "Olena2",
+      "userMail": "bkmet@gmail.com",
+      "userGender": "MAN",
+      "userPhone": "0672485927",
+      "userPassword": "Qaz1234!",
+      "userPass2": "Qaz1234!",
+      "firstLogin": false,
+      "id": 5
     },
     {
       "isLogin": false,
-      "userName": "Anastasiia",
-      "userSurname": "Kmet",
-      "userLogin": "Nastia",
+      "userName": "Olena",
+      "userSurname": "Hohoho",
+      "userLogin": "Olena3",
       "userMail": "bkmet@gmail.com",
+      "userGender": "WOMAN",
       "userPhone": "0672485927",
-      "userPassword": "Nastia8!",
-      "userPass2": "Nastia8!",
-      "id": 3
+      "userPassword": "Qwerty123!",
+      "userPass2": "Qwerty123!",
+      "firstLogin": false,
+      "id": 6
     }
   ]
 }

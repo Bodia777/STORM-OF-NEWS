@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="changeProfile"  (click)="changeProfile()">
+    <i class="material-icons pen">edit</i>
+    <small class="changeProfileLetters">change _ profile</small>
+  </div>
+  <div class="photo">
+    <div [ngClass]="stormNewsService.currentUser[0].userGender === 'WOMAN'? 'woman' : 'man'">
+      <button mat-button color="accent" class="addPhotoBtn">Add photo</button>
+    </div>
+    <div class="wrappet">
+      <div class="nameSurname" *ngIf="!changeProfileChecker">Name: {{stormNewsService.currentUser[0].userName}}</div>
+      <div class="nameSurname" *ngIf="!changeProfileChecker">Second name: {{stormNewsService.currentUser[0].userSurname}}</div>
+      <div class="nameSurname" *ngIf="!changeProfileChecker">Login: {{stormNewsService.currentUser[0].userLogin}}</div>
+      <div class="nameSurname" *ngIf="!changeProfileChecker">Email: {{stormNewsService.currentUser[0].userMail}}</div>
+    </div>
+
+  </div>
+  <div class="coolLine"></div>
+</div>
+<div class="containerBig"></div>

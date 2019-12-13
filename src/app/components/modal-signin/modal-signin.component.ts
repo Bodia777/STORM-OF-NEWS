@@ -1,12 +1,5 @@
-import {
-  Component,
-  OnInit,
-  Inject,
-  OnDestroy
-} from '@angular/core';
-import {
-  StormNewsService
-} from 'src/app/services/storm-news.service';
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
+import { StormNewsService } from 'src/app/services/storm-news.service';
 import {
   MAT_DIALOG_DATA,
   MatDialogRef,
@@ -77,10 +70,15 @@ export class ModalSigninComponent implements OnInit, OnDestroy {
               this.isLogged = true;
               this.dialogRef.close();
               this.stormNewsService.logIn = 'Logout';
+              if (this.stormNewsService.currentUser[0].firstLogin === true) {
+              this.router.navigate(['profile']);
+              this.stormNewsService.currentUser[0].firstLogin = false;
+            } else {
               this.router.navigate(['news']);
+            }
               try {
-              this.userResult = await this.stormNewsService.putChangesUserArr();
-              this.stormNewsService.hello = `Hello, ${this.stormNewsService.currentUser[0].userName}`;
+                this.userResult = await this.stormNewsService.putChangesUserArr();
+                this.stormNewsService.hello = `Hello, ${this.stormNewsService.currentUser[0].userName}`;
               } catch (error) {
                 console.log(error);
               }

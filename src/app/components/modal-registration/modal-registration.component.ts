@@ -1,12 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { StormNewsService } from 'src/app/services/storm-news.service';
 import { ModalLoginCheckComponent } from '../modal-login-check/modal-login-check.component';
-// import { Visitor } from 'src/app/interface';
-import {Subject, Observable} from 'rxjs';
-// import {takeUntil} from 'rxjs/operators';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 @Component({
@@ -43,7 +39,6 @@ export class ModalRegistrationComponent implements OnInit {
     public dialogRef: MatDialogRef < ModalRegistrationComponent > ,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private stormNewsService: StormNewsService,
-    // private http: HttpClient
   ) {}
 
   ngOnInit(): void {
@@ -56,9 +51,11 @@ export class ModalRegistrationComponent implements OnInit {
       userSurname: [],
       userLogin: [],
       userMail: [],
+      userGender: ['', Validators.required],
       userPhone: [],
       userPassword: [],
-      userPass2: []
+      userPass2: [],
+      firstLogin: true,
     });
   }
   onSubmit(): void {}
@@ -133,6 +130,7 @@ export class ModalRegistrationComponent implements OnInit {
       }
       this.userNew.isLogin = false;
       this.stormNewsService.newUser = Object.assign(this.userNew, );
+      console.log(this.stormNewsService.newUser);
       this.stormNewsService.postNewUser();
       this.regisrtrationForm.reset();
       this.dialogRef.close(2);
@@ -150,46 +148,24 @@ export class ModalRegistrationComponent implements OnInit {
     // tslint:disable-next-line: forin
     this.stormNewsService.getUserArr()
     .subscribe(
-      (userarr) => {},
+      (userarr) => {
+        this.stormNewsService.userArr = userarr.slice();
+        for (const key in this.stormNewsService.userArr) {
+          // tslint:disable-next-line: no-string-literal
+          if (this.stormNewsService.userArr[key].userLogin === this.regisrtrationForm.controls['userLogin'].value) {
+            const dialogRef3 = this.dialog3.open(ModalLoginCheckComponent, {
+              data: {
+                choseTextInModalCheckComponent: 'This login has already exist!'
+              }
+            });
+            dialogRef3.afterClosed().subscribe(result => {});
+            // tslint:disable-next-line: no-string-literal
+            this.regisrtrationForm.controls['userLogin'].setValue('');
+          }
+        }
+    },
       (err) => {console.log(err); }
     );
-    for (const key in this.stormNewsService.userArr) {
-      // tslint:disable-next-line: no-string-literal
-      if (this.stormNewsService.userArr[key].userLogin === this.regisrtrationForm.controls['userLogin'].value) {
-        const dialogRef3 = this.dialog3.open(ModalLoginCheckComponent, {
-          data: {
-            choseTextInModalCheckComponent: 'This login has already exist!'
-          }
-        });
-        dialogRef3.afterClosed().subscribe(result => {});
-        // tslint:disable-next-line: no-string-literal
-        this.regisrtrationForm.controls['userLogin'].setValue('');
-      }
-    }
   }
 }
 
-//   getUserArr(): void {
-// this.stormNewsService.getUserArr()
-// .subscribe(
-//   (userArr) => {console.log(userArr);
-//   },
-//   (err) => {console.log(err);
-//   });
-//   }
-// }
-
-// getUserArr(): Observable<Array<Visitor>> {
-//   return this.http.get<Array<Visitor>>(this.url);
-// }
-
-// async getIdNewUser(this.) {
-//   const url = 'http://localhost:3000/userArr';
-//   const req = new Request(url);
-//   const response = await fetch(req);
-//   const promiseResult = await response.json();
-//   user.userId = promiseResult.length+1;
-//   this.newUser = Object.assign(user, );
-//   console.log(this.newUser, 'get');
-//   this.http.post('http://localhost:3000/userArr', this.newUser).subscribe()
-// }

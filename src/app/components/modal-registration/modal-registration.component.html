@@ -8,7 +8,7 @@
           <div>
             <input matInput color="primary" type="text" id="name" placeholder="FIRST NAME" formControlName="userName"
             [pattern]="regForstring" required class="input">
-            <span
+            <span class="spanForInput"
             *ngIf="regisrtrationForm.controls['userName'].invalid && regisrtrationForm.controls['userName'].dirty">*only
             letters and space between them</span>
           </div>
@@ -17,7 +17,7 @@
           <div>
             <input matInput type="text" id="surname" placeholder="SECOND NAME" formControlName="userSurname"
             [pattern]="regForstring" required>
-            <span
+            <span class="spanForInput"
             *ngIf="regisrtrationForm.controls['userSurname'].invalid && regisrtrationForm.controls['userSurname'].dirty">*only
             letters and space between them</span>
           </div>
@@ -28,7 +28,7 @@
           <div>
             <input matInput type="text" id="login" placeholder="LOGIN" formControlName="userLogin" [pattern]="regForlogin"
             required (blur)="checkLoginRepeat()">
-            <span
+            <span class="spanForInput"
             *ngIf="regisrtrationForm.controls['userLogin'].invalid && regisrtrationForm.controls['userLogin'].dirty">*only
             letters and numbers</span>
           </div>
@@ -37,39 +37,41 @@
           <div>
             <input matInput type="mail" id="mail" placeholder="EMAIL" formControlName="userMail" [pattern]="regExpMail"
             required>
-            <span
+            <span class="spanForInput"
             *ngIf="regisrtrationForm.controls['userMail'].invalid && regisrtrationForm.controls['userMail'].dirty">*wrong
             email</span>
           </div>
         </mat-form-field>
       </div>
-        <div class="center">
-          <mat-form-field>
-            <input matInput type="text" id="phone" placeholder="PHONE NUMBER" formControlName="userPhone"
-            [pattern]="regExpPhone" required>
-           <span *ngIf="regisrtrationForm.controls['userPhone'].invalid && regisrtrationForm.controls['userPhone'].dirty">*wrong phone number</span>
+      <div class="center">
+        <mat-form-field>
+            <input matInput type="text" id="phone" placeholder="PHONE NUMBER" formControlName="userPhone" [pattern]="regExpPhone" required>
+           <span class="spanForInput" *ngIf="regisrtrationForm.controls['userPhone'].invalid && regisrtrationForm.controls['userPhone'].dirty">*wrong phone number</span>
           </mat-form-field>
+            <span>
+            <mat-radio-group formControlName="userGender">
+              <span class="radioForGender">
+                <mat-radio-button type="radio" id="genderMan"  name="userGender" value="MAN">MAN</mat-radio-button>
+              </span>
+              <span class="radioForGender">
+                <mat-radio-button type ="radio" id="genderWoman"  name="userGender" value = "WOMAN">WOMAN</mat-radio-button>
+              </span>
+            </mat-radio-group>
+            </span>
         </div>
-        <!-- <div class="radioForGender">GENDER</div>
-          <div>
-            <input type="radio" id="genderMan" name="gender" placeholder="type here...." value="man">
-            <label for="genderMan" formControlName="genderMan">MAN</label>
-            <input type="radio" id="genderWoman" name="gender" placeholder="type here...." value="woman" formControlName="genderWoman">
-            <label for="genderWoman">WOMAN</label>
-          </div> -->
           <div class="center">
             <mat-form-field>
               <div>
                 <input matInput type="password" id="pass" placeholder="PASSWORD" formControlName="userPassword"
                 (change)="inputPasswordChange()" required >
-                <span *ngIf="regisrtrationForm.controls['userPassword'].touched && regisrtrationForm.controls['userPassword'].invalid">*wrong password</span>
+                <span class="spanForInput" *ngIf="regisrtrationForm.controls['userPassword'].touched && regisrtrationForm.controls['userPassword'].invalid">*wrong password</span>
               </div>
       </mat-form-field>
       <mat-form-field>
         <div>
           <input matInput type="password" id="pass2" placeholder="CONFIRM PASSWORD" formControlName="userPass2"
           required (blur)="confirmPassFunc()" >
-          <span *ngIf="regisrtrationForm.controls['userPass2'].invalid && regisrtrationForm.controls['userPass2'].touched" >*wrong confirm</span>
+          <span class="spanForInput" *ngIf="regisrtrationForm.controls['userPass2'].invalid && regisrtrationForm.controls['userPass2'].touched" >*wrong confirm</span>
         </div>
       </mat-form-field>
     </div>

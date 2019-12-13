@@ -7,10 +7,12 @@ import { AboutComponent } from './components/about/about.component';
 import { ItemDetailsComponent } from './components/news/news-item/item-details/item-details.component';
 import { NewsRouterComponent } from './components/news/news-router/news-router.component';
 import { AuthGuard } from './auth/auth.guard';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'registration', pathMatch: 'full' },
   { path: 'registration', component: EnterComponent },
+  { path: 'profile', component: ProfileComponent },
   { path: 'news', component: NewsRouterComponent,
    canActivate: [AuthGuard],
   children: [

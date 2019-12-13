@@ -8,6 +8,8 @@ export class Visitor {
     userPassword: string;
     userPass2?: string;
     isLogin?: boolean;
+    userGender?: string;
+    firstLogin: boolean;
 }
 
 export class News {

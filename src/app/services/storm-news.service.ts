@@ -19,7 +19,9 @@ public newUser: Visitor = {
   userPass2: '',
   userPassword: '',
   userSurname: '',
-  isLogin: false
+  isLogin: false,
+  userGender: '',
+  firstLogin: true
 };
 public userArr: Array<Visitor> = [];
 public newsArr: Array<News> = [];
