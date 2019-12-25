@@ -31,6 +31,12 @@ public hello = '';
 public logIn = 'Login';
 private url = 'http://localhost:3000/userarr';
 private unsubscribed = new Subject();
+public changeProfileChecker = false;
+public newsSource = {
+  typeOfNews: 'top-headlines?',
+  countrySelect: 'us',
+  categorySelect: '',
+};
 
   constructor(private http: HttpClient) { }
 
@@ -63,6 +69,8 @@ async postNewUser() {
                            this.currentUser[0] = Object.assign(data);
                            this.currentUser = [];
                            this.currentUser.push(data);
+                           console.log(this.currentUser[0].fd);
+
                 },
                 (err) => {rej(err); }
               ); });

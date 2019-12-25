@@ -13,7 +13,7 @@
             letters and space between them</span>
           </div>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field class="mrnlft5px">
           <div>
             <input matInput type="text" id="surname" placeholder="SECOND NAME" formControlName="userSurname"
             [pattern]="regForstring" required>
@@ -33,7 +33,7 @@
             letters and numbers</span>
           </div>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field class="mrnlft5px">
           <div>
             <input matInput type="mail" id="mail" placeholder="EMAIL" formControlName="userMail" [pattern]="regExpMail"
             required>
@@ -67,7 +67,7 @@
                 <span class="spanForInput" *ngIf="regisrtrationForm.controls['userPassword'].touched && regisrtrationForm.controls['userPassword'].invalid">*wrong password</span>
               </div>
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field class="mrnlft5px">
         <div>
           <input matInput type="password" id="pass2" placeholder="CONFIRM PASSWORD" formControlName="userPass2"
           required (blur)="confirmPassFunc()" >
@@ -87,8 +87,8 @@
   </mat-dialog-content>
   <mat-dialog-actions>
     <div class="divForButtons">
-      <button mat-button color="accent" [mat-dialog-close]="regisrtrationForm" cdkFocusInitial>CANCEL</button>
-      <button mat-raised-button type="submit" color="accent" (click)="addNewUser()" [disabled]="regisrtrationForm.invalid">SIGN UP</button>
+      <button mat-button color="accent" [mat-dialog-close]="regisrtrationForm" cdkFocusInitial (click)="cancel()">CANCEL</button>
+      <button mat-raised-button type="submit" color="accent" (click)="addNewUser()" [disabled]="regisrtrationForm.invalid">SAVE</button>
     </div>
   </mat-dialog-actions>
 </div>

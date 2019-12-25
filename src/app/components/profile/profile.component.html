@@ -1,20 +1,76 @@
 <div class="container">
   <div class="changeProfile"  (click)="changeProfile()">
     <i class="material-icons pen">edit</i>
-    <small class="changeProfileLetters">change _ profile</small>
+    <small class="changeProfileLetters">change profile</small>
   </div>
   <div class="photo">
-    <div [ngClass]="stormNewsService.currentUser[0].userGender === 'WOMAN'? 'woman' : 'man'">
-      <button mat-button color="accent" class="addPhotoBtn">Add photo</button>
+    <div [ngClass]="stormNewsService.currentUser[0].userGender === 'WOMAN'? 'woman' : 'man'" #divForPhoto>
+      <input type="file" class="inputFileClass" id="inputFileClass" (change)="addPhoto($event)">
+      <button mat-button color="accent" class="addPhotoBtn" >
+        <label for="inputFileClass" class="addPhotoBtn">Add photo</label>
+        </button>
+    </div>
     </div>
     <div class="wrappet">
-      <div class="nameSurname" *ngIf="!changeProfileChecker">Name: {{stormNewsService.currentUser[0].userName}}</div>
-      <div class="nameSurname" *ngIf="!changeProfileChecker">Second name: {{stormNewsService.currentUser[0].userSurname}}</div>
-      <div class="nameSurname" *ngIf="!changeProfileChecker">Login: {{stormNewsService.currentUser[0].userLogin}}</div>
-      <div class="nameSurname" *ngIf="!changeProfileChecker">Email: {{stormNewsService.currentUser[0].userMail}}</div>
-    </div>
-
+      <div class="nameSurname" *ngIf="!stormNewsService.changeProfileChecker">Name: {{stormNewsService.currentUser[0].userName}}</div>
+      <div class="nameSurname" *ngIf="!stormNewsService.changeProfileChecker">Second name: {{stormNewsService.currentUser[0].userSurname}}</div>
+      <div class="nameSurname" *ngIf="!stormNewsService.changeProfileChecker">Login: {{stormNewsService.currentUser[0].userLogin}}</div>
+      <div class="nameSurname" *ngIf="!stormNewsService.changeProfileChecker">Email: {{stormNewsService.currentUser[0].userMail}}</div>
+      <div class="nameSurname" *ngIf="!stormNewsService.changeProfileChecker">Phone number: {{stormNewsService.currentUser[0].userPhone}}</div>
   </div>
   <div class="coolLine"></div>
+  <form class="typeOfNews" [formGroup]="profileNewsFormGroup">
+    <div class="typeOfNewsContainer">
+      <mat-radio-group formControlName="typeOfNews">
+        <span class="radioMainNews">
+          <mat-radio-button type="radio" name="typeOfNews" value="top-headlines?">Main Daily News</mat-radio-button>
+        </span>
+        <span class="radioForAllNews">
+          <mat-radio-button type ="radio" name="typeOfNews" value="everything?">All News</mat-radio-button>
+        </span>
+      </mat-radio-group>
+    </div>
+    <div class="typeOfNewsContainer">
+      <mat-form-field class="changesForFormControl">
+        <input class="inputControlWord" matInput type="text" placeholder="Control words" formControlName="controlWord">
+      </mat-form-field>
+    </div>
+    <div class="typeOfNewsContainer">
+    <mat-form-field>
+      <input matInput color="accent" [matDatepicker]="fromDatePickerNews" formControlName="dateFrom" placeholder="DATE FROM" [max]="maxDate">
+      <mat-datepicker-toggle matSuffix [for]="fromDatePickerNews"></mat-datepicker-toggle>
+      <mat-datepicker #fromDatePickerNews></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="mrgnlf1vw">
+      <input matInput color="accent" [matDatepicker]="toDatePickerNews" formControlName="dateTo" placeholder="DATE TO" [max]="maxDate">
+      <mat-datepicker-toggle matSuffix [for]="toDatePickerNews"></mat-datepicker-toggle>
+      <mat-datepicker #toDatePickerNews></mat-datepicker>
+    </mat-form-field>
+    </div>
+    <div class="typeOfNewsContainer">
+      <mat-form-field class="width">
+        <mat-label>Choose country</mat-label>
+        <mat-select formControlName="countrySelect">
+          <mat-option value="all" selected>All countries</mat-option>
+          <mat-option value="us">United States</mat-option>
+          <mat-option value="gb">United Kingdom</mat-option>
+          <mat-option value="ua">Ukraine</mat-option>
+          <mat-option value="tr">Turkey</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="mrgnlf1vw width">
+        <mat-label>Choose category</mat-label>
+        <mat-select formControlName="categorySelect">
+          <mat-option value="all" selected>All categories</mat-option>
+          <mat-option value="business">business</mat-option>
+          <mat-option value="entertainment">entertainment</mat-option>
+          <mat-option value="health">health</mat-option>
+          <mat-option value="science">science</mat-option>
+          <mat-option value="sports">sports</mat-option>
+          <mat-option value="technology">technology</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    </form>
 </div>
 <div class="containerBig"></div>

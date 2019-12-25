@@ -16,9 +16,12 @@ constructor(public stormNewsService: StormNewsService) { }
     this.showNews();
   }
   async showNews() {
-    const url = 'https://newsapi.org/v2/top-headlines?' +
-    'country=us&' +
+    const url = `https://newsapi.org/v2/${this.stormNewsService.newsSource.typeOfNews}` +
+    // `country = ${this.stormNewsService.newsSource.countrySelect}&` + `category = ${this.stormNewsService.newsSource.categorySelect}&` +
+    `q=apple&from=2019-12-23&` +
     'apiKey=bcac83edc8f44bbeb1a0118b3b622b4d';
+    console.log(url);
+
     const req = new Request(url);
     // tslint:disable-next-line: only-arrow-functions
     const response = await fetch(req);

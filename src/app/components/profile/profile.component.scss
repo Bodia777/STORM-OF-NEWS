@@ -1,71 +1,124 @@
-.containerBig{
-    background-image: url(/assets/img/newspapers.jpg);
-    background-size: 100% 100%;
-    background-repeat: no no-repeat;
-    width: 100%;
-    height: 100vh;
-    margin-top: -95vh;
-    padding-top: 7vh;
-    position: relative;
-    z-index: -1;
+.containerBig {
+  background-image: url(/assets/img/newspapers.jpg);
+  background-size: 100% 100%;
+  background-repeat: no no-repeat;
+  width: 100%;
+  height: 100vh;
+  margin-top: -95vh;
+  padding-top: 7vh;
+  position: relative;
+  z-index: -1;
 }
-.container{
-    margin-top: 5vh;
-    width: 85vw;
-    height: 80vh;
-    border: 1px solid black;
-    margin: 5vh auto 0vh;
-    background-color: rgba(211, 201, 201, 0.8);
-    position: relative;
-} 
-.changeProfile{
-    position: absolute;
-    top: 2vh;
-    right: 2vw;
-    width: 98px;
-    height: 10px;
-    z-index: 100;
+
+.container {
+  margin-top: 5vh;
+  width: 85vw;
+  height: 80vh;
+  border: 1px solid black;
+  margin: 5vh auto 0vh;
+  background-color: rgba(211, 201, 201, 0.8);
+  position: relative;
 }
+
+.changeProfile {
+  position: absolute;
+  top: 2vh;
+  right: 2vw;
+  width: 98px;
+  height: 10px;
+  z-index: 100;
+}
+
 .changeProfileLetters {
-    margin-left: 0px;
-    margin-top: 1px;
-    position: absolute;
-    top:-0.5px;
-    right:4px;
-    font-style: italic;
+  margin-left: 0px;
+  margin-top: 1px;
+  position: absolute;
+  top: -0.5px;
+  right: 4px;
+  font-style: italic;
 }
-.pen{
-    position: absolute;
-    top:0px;
-    right: 36.65px;
+
+.pen {
+  position: absolute;
+  top: -4px;
+  right: 92px;
 }
-.changeProfile:hover, .changeProfileLetters:hover, .pen:hover{
-    color: orangered;
-    cursor: pointer;
+
+.changeProfile:hover,
+.changeProfileLetters:hover,
+.pen:hover {
+  color: orangered;
+  cursor: pointer;
 }
-.woman{
-    width: 15vh;
-    height: 20vh;
-    border: 1px solid black;
-    margin: 5vh 3vw;
-    background-image: url(/assets/img/manWooman.png);
-    background-position: 10% 10%;
-    background-size: 190% 100%;
+
+.woman {
+  width: 15vh;
+  height: 20vh;
+  border: 1px solid black;
+  margin: 5vh 3vw;
+  background-image: url(/assets/img/manWooman.png);
+  background-position: 10% 10%;
+  background-size: 190% 100%;
 }
-.man{
-    width: 15vh;
-    height: 20vh;
-    border: 1px solid black;
-    margin: 5vh 3vw;
-    background-image: url(/assets/img/manWooman.png);
-    background-position: 108% 10%;
-    background-size: 190% 100%;
+
+.man {
+  width: 15vh;
+  height: 20vh;
+  border: 1px solid black;
+  margin: 3vh 3vw;
+  background-image: url(/assets/img/manWooman.png);
+  background-position: 108% 10%;
+  background-size: 190% 100%;
 }
-.addPhotoBtn{
-    margin: 14vh auto;
+
+.addPhotoBtn {
+  margin: 12vh auto;
 }
-.wrappet{
-    position: absolute;
-    top: 5vh;
-    right: 50vw;
+
+.wrappet {
+  position: absolute;
+  top: 5vh;
+  left: 30vw;
+}
+
+.coolLine {
+  width: 60vw;
+  height: 8vh;
+  background-image: url(/assets/img/beautyLine.png);
+  background-size: 100% 600%;
+  background-position: 0% 0%;
+  background-repeat: no-repeat;
+  position: relative;
+  top: -4vh;
+  left: 12.5vw;
+}
+.typeOfNews {
+  height: 31vh;
+}
+.typeOfNewsContainer {
+    width: 85vw;
+    height: 8vh;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top: -2vh;
+}
+.radioForAllNews {
+  margin-left: 4vw;
+}
+.inputControlWord{
+  width: 70vw;
+}
+.changesForFormControl {
+  width: 405px;
+  margin-top: -2vh;
+}
+.mrgnlf1vw{
+  margin-left: 5px;
+}
+.width{
+  width:200px
+}
+.inputFileClass{
+  visibility: hidden;
 }

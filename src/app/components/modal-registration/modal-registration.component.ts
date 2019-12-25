@@ -1,8 +1,10 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { StormNewsService } from 'src/app/services/storm-news.service';
 import { ModalLoginCheckComponent } from '../modal-login-check/modal-login-check.component';
+import { takeUntil } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
 
 
 @Component({
@@ -11,7 +13,7 @@ import { ModalLoginCheckComponent } from '../modal-login-check/modal-login-check
   styleUrls: ['./modal-registration.component.scss']
 })
 
-export class ModalRegistrationComponent implements OnInit {
+export class ModalRegistrationComponent implements OnInit, OnDestroy {
   userNew = {isLogin: false};
   regisrtrationForm: FormGroup;
   passwordWalidationChecker = 0;
@@ -30,6 +32,7 @@ export class ModalRegistrationComponent implements OnInit {
   passwordNumberChecker = false;
   passwordSymbolChecker = false;
   passwordSpaceChecker = false;
+  private unsubscribed = new Subject();
 
   // private unsubscribed = new Subject();
 
@@ -44,8 +47,13 @@ export class ModalRegistrationComponent implements OnInit {
   ngOnInit(): void {
     this.createregistrationForm();
   }
+  ngOnDestroy(): void {
+    this.unsubscribed.next();
+    this.unsubscribed.complete();
+  }
 
   private createregistrationForm(): void {
+    if (this.stormNewsService.changeProfileChecker === false) {
     this.regisrtrationForm = this.fb.group({
       userName: [],
       userSurname: [],
@@ -56,7 +64,23 @@ export class ModalRegistrationComponent implements OnInit {
       userPassword: [],
       userPass2: [],
       firstLogin: true,
+      isLogin: false,
     });
+  } else {
+    this.regisrtrationForm = this.fb.group({
+      userName: [this.stormNewsService.currentUser[0].userName],
+      userSurname: [this.stormNewsService.currentUser[0].userSurname],
+      userLogin: [this.stormNewsService.currentUser[0].userLogin],
+      userMail: [this.stormNewsService.currentUser[0].userMail],
+      userGender: [this.stormNewsService.currentUser[0].userGender, Validators.required],
+      userPhone: [this.stormNewsService.currentUser[0].userPhone],
+      userPassword: [this.stormNewsService.currentUser[0].userPassword],
+      userPass2: [this.stormNewsService.currentUser[0].userPass2],
+      firstLogin: false,
+      id: [this.stormNewsService.currentUser[0].id],
+      isLogin: true,
+    });
+  }
   }
   onSubmit(): void {}
   inputPasswordChange(): void {
@@ -124,17 +148,54 @@ export class ModalRegistrationComponent implements OnInit {
   }
 
     addNewUser(): void {
+      if (this.stormNewsService.changeProfileChecker === false) {
       // tslint:disable-next-line: forin
       for (const key in this.regisrtrationForm.value) {
         this.userNew[key] = this.regisrtrationForm.value[key];
       }
       this.userNew.isLogin = false;
       this.stormNewsService.newUser = Object.assign(this.userNew, );
-      console.log(this.stormNewsService.newUser);
       this.stormNewsService.postNewUser();
       this.regisrtrationForm.reset();
       this.dialogRef.close(2);
-  }
+    // tslint:disable-next-line: max-line-length && tslint:disable-next-line: no-string-literal
+    } else if (this.stormNewsService.changeProfileChecker === true && this.stormNewsService.currentUser[0].userLogin === this.regisrtrationForm.controls['userLogin'].value) {
+      // tslint:disable-next-line: forin
+      this.stormNewsService.currentUser[0] = Object.assign(this.regisrtrationForm.value, );
+      this.stormNewsService.putChangesUserArr();
+      console.log(this.stormNewsService.currentUser);
+      this.dialogRef.close();
+      this.stormNewsService.changeProfileChecker = false;
+    // tslint:disable-next-line: max-line-length && tslint:disable-next-line: no-string-literal
+    } else if (this.stormNewsService.changeProfileChecker === true && this.stormNewsService.currentUser[0].userLogin !== this.regisrtrationForm.controls['userLogin'].value) {
+      this.stormNewsService.getUserArr()
+      .pipe(takeUntil(this.unsubscribed))
+      .subscribe(
+        (userarr) => {
+          this.stormNewsService.userArr = userarr.slice();
+          for (const key in this.stormNewsService.userArr) {
+            // tslint:disable-next-line: no-string-literal
+            if (this.stormNewsService.userArr[key].userLogin === this.regisrtrationForm.controls['userLogin'].value) {
+              // tslint:disable-next-line: no-string-literal
+              this.regisrtrationForm.controls['userLogin'].setValue(this.stormNewsService.currentUser[0].userLogin);
+              // tslint:disable-next-line: no-unused-expression
+              this.stormNewsService.changeProfileChecker = false;
+              break;
+            } else {
+              // tslint:disable-next-line: forin && tslint:disable-next-line: no-shadowed-variable
+                this.stormNewsService.currentUser[0] = Object.assign(this.regisrtrationForm.value, );
+                this.stormNewsService.putChangesUserArr();
+                console.log(this.stormNewsService.currentUser);
+                // tslint:disable-next-line: no-unused-expression
+                this.stormNewsService.changeProfileChecker = false;
+                this.dialogRef.close();
+                }
+            }
+          },
+        (err) => {console.log(err); }
+      );
+    }
+}
   confirmPassFunc() {
     // tslint:disable-next-line: no-string-literal
     if (this.regisrtrationForm.controls['userPass2'].value !== this.regisrtrationForm.controls['userPassword'].value) {
@@ -145,6 +206,9 @@ export class ModalRegistrationComponent implements OnInit {
     }
 }
   checkLoginRepeat() {
+    // tslint:disable-next-line: no-string-literal
+    if (this.stormNewsService.currentUser[0].userLogin === this.regisrtrationForm.controls['userLogin'].value) {
+    } else {
     // tslint:disable-next-line: forin
     this.stormNewsService.getUserArr()
     .subscribe(
@@ -160,12 +224,19 @@ export class ModalRegistrationComponent implements OnInit {
             });
             dialogRef3.afterClosed().subscribe(result => {});
             // tslint:disable-next-line: no-string-literal
+            if (this.stormNewsService.changeProfileChecker === false) {
+            // tslint:disable-next-line: no-string-literal
             this.regisrtrationForm.controls['userLogin'].setValue('');
+            } else { }
           }
         }
     },
       (err) => {console.log(err); }
     );
   }
+}
+cancel() {
+  this.stormNewsService.changeProfileChecker = false;
+}
 }
 

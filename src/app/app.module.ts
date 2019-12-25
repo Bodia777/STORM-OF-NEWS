@@ -11,7 +11,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalSigninComponent } from './components/modal-signin/modal-signin.component';
 import { ModalRegistrationComponent } from './components/modal-registration/modal-registration.component';
 // tslint:disable-next-line: max-line-length
-import { MatDialogModule, MatFormFieldModule, MatButtonModule, MatInputModule, MatListModule, MatDialogRef, MAT_DIALOG_DATA, MatRadioModule } from '@angular/material';
+import { MatDialogModule, MatFormFieldModule, MatButtonModule, MatInputModule, MatListModule, MatDialogRef, MAT_DIALOG_DATA, MatRadioModule, MatDatepickerModule, MatNativeDateModule, MatSelectModule } from '@angular/material';
 import { ModalLoginCheckComponent } from './components/modal-login-check/modal-login-check.component';
 import { NewsComponent } from './components/news/news.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -56,6 +56,9 @@ import { ProfileComponent } from './components/profile/profile.component';
     MatListModule,
     AppRoutingModule,
     HttpClientModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule
   ],
   providers: [
     { provide: MatDialogRef, useValue: {} },
