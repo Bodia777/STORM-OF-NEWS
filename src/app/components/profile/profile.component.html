@@ -3,6 +3,10 @@
     <i class="material-icons pen">edit</i>
     <small class="changeProfileLetters">change profile</small>
   </div>
+    <div class="deleteProfile"  (click)="deleteProfile()">
+      <strong>X</strong>
+      <small class="changeProfileLetters">delete profile</small>
+    </div>
   <div class="photo">
     <div [ngClass]="stormNewsService.currentUser[0].userGender === 'WOMAN'? 'woman' : 'man'" #divForPhoto>
       <input type="file" class="inputFileClass" id="inputFileClass" (change)="addPhoto($event)">
@@ -32,12 +36,12 @@
     </div>
     <div class="typeOfNewsContainer">
       <mat-form-field class="changesForFormControl">
-        <input class="inputControlWord" matInput type="text" placeholder="Control words" formControlName="controlWord">
+        <input class="inputControlWord" matInput type="text" placeholder="type word to search...." formControlName="controlWord">
       </mat-form-field>
     </div>
     <div class="typeOfNewsContainer">
     <mat-form-field>
-      <input matInput color="accent" [matDatepicker]="fromDatePickerNews" formControlName="dateFrom" placeholder="DATE FROM" [max]="maxDate">
+      <input matInput color="accent" [matDatepicker]="fromDatePickerNews" formControlName="dateFrom" placeholder="DATE FROM" [max]="maxDate" pipe="">
       <mat-datepicker-toggle matSuffix [for]="fromDatePickerNews"></mat-datepicker-toggle>
       <mat-datepicker #fromDatePickerNews></mat-datepicker>
     </mat-form-field>
@@ -47,11 +51,10 @@
       <mat-datepicker #toDatePickerNews></mat-datepicker>
     </mat-form-field>
     </div>
-    <div class="typeOfNewsContainer">
+    <div class="typeOfNewsContainer" *ngIf="stormNewsService.typeOfNewsChecker">
       <mat-form-field class="width">
         <mat-label>Choose country</mat-label>
-        <mat-select formControlName="countrySelect">
-          <mat-option value="all" selected>All countries</mat-option>
+        <mat-select formControlName="countrySelect" >
           <mat-option value="us">United States</mat-option>
           <mat-option value="gb">United Kingdom</mat-option>
           <mat-option value="ua">Ukraine</mat-option>
@@ -68,6 +71,25 @@
           <mat-option value="science">science</mat-option>
           <mat-option value="sports">sports</mat-option>
           <mat-option value="technology">technology</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="typeOfNewsContainer" *ngIf="!stormNewsService.typeOfNewsChecker">
+      <mat-form-field class="width">
+        <mat-label>Choose language</mat-label>
+        <mat-select formControlName="languageSelect" >
+          <mat-option value="en">English</mat-option>
+          <mat-option value="ru">Russian</mat-option>
+          <mat-option value="es">Espaniol</mat-option>
+          <mat-option value="fr">Francuas</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="mrgnlf1vw width">
+        <mat-label>sort by...</mat-label>
+        <mat-select formControlName="sortBy">
+          <mat-option value="relevancy">relevancy</mat-option>
+          <mat-option value="popularity">popularity</mat-option>
+          <mat-option value="publishedAt">published at...</mat-option>
         </mat-select>
       </mat-form-field>
     </div>

@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, ActivatedRoute, Router } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { StormNewsService } from '../services/storm-news.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';

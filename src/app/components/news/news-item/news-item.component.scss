@@ -1,5 +1,5 @@
 .container{
-    width: 300px;
+    width: 350px;
     height: 370px;
     background-color:white;
     border: 1px solid black;
@@ -11,17 +11,28 @@
 img{
     margin-left: -20px;
     margin-bottom: 5px;
-    margin-top: 5px;
-    width: 299px;
-    height: 180px;
+    margin-top: -20px;
+    width: 348px;
+    height: 247px;
 }
 .divAbsent{
-    width: 253px;
+    width: 303px;
     height: 180px;
 }
 button{
     position: absolute;
-    bottom: 1.5vh;
+    bottom: 0vh;
     left: 0vw;
-    width: 299px;
+    width: 348px;
+}
+.author {
+    position: absolute;
+    left: 3vw;
+    top: 46.5vh;
+    background-color: #fff;
+    z-index: 0;
+}
+.title {
+    height: 9vh;
+    overflow: hidden;
 }

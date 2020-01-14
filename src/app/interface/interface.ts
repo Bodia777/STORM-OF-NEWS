@@ -22,4 +22,16 @@ export class News {
     title: null | string;
     url: null | string;
     urlToImage: null | string;
+    searchAnyField?: string;
+}
+
+export class NewsRequest {
+    typeOfNews: string;
+    controlWord: string;
+    dateFrom: string;
+    dateTo: string;
+    countrySelect: string;
+    categorySelect: string;
+    languageSelect: string;
+    sortBy: string;
 }

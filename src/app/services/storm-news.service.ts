@@ -1,5 +1,5 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { Visitor, News } from 'src/app/interface';
+import { Visitor, News, NewsRequest } from 'src/app/interface';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
@@ -29,13 +29,19 @@ public chosingNewsId: number;
 public currentUser = [];
 public hello = '';
 public logIn = 'Login';
-private url = 'http://localhost:3000/userarr';
+public url = 'http://localhost:3000/userarr';
 private unsubscribed = new Subject();
 public changeProfileChecker = false;
-public newsSource = {
-  typeOfNews: 'top-headlines?',
-  countrySelect: 'us',
-  categorySelect: '',
+public typeOfNewsChecker = true;
+public newsSource: NewsRequest = {
+    typeOfNews: 'top-headlines?',
+    controlWord: ' ',
+    dateFrom: '2019-12-26',
+    dateTo: '2019-12-26',
+    countrySelect: 'us',
+    categorySelect: ' ',
+    languageSelect: ' ',
+    sortBy: 'publishedAt'
 };
 
   constructor(private http: HttpClient) { }
@@ -53,11 +59,12 @@ async postNewUser() {
   const req = new Request(this.url);
   const response = await fetch(req);
   const promiseResult = await response.json();
-  this.newUser.id = promiseResult.length + 1;
+  this.newUser.id = promiseResult.pop().id + 1;
   this.http.post(this.url, this.newUser)
   .pipe(takeUntil(this.unsubscribed))
   .subscribe();
 }
+
   putChangesUserArr(): Promise<any> {
   const headers = new HttpHeaders({ 'Content-Type': 'application/json'});
   const options = { headers };
@@ -69,10 +76,29 @@ async postNewUser() {
                            this.currentUser[0] = Object.assign(data);
                            this.currentUser = [];
                            this.currentUser.push(data);
-                           console.log(this.currentUser[0].fd);
-
                 },
                 (err) => {rej(err); }
               ); });
+}
+
+async deleteUser() {
+  const urlforDelete = 'http://localhost:3000/deleteuser';
+  this.currentUser[0].previousId = this.currentUser[0].id;
+  const req = new Request(urlforDelete);
+  const response = await fetch(req);
+  const promiseResult = await response.json();
+  this.currentUser[0].id = promiseResult.length + 1;
+  this.http.post(urlforDelete, this.currentUser[0])
+  .pipe(takeUntil(this.unsubscribed))
+  .subscribe();
+  this.currentUser[0].id = this.currentUser[0].previousId;
+  this.http.delete(`${this.url}/${this.currentUser[0].id}`, this.currentUser[0])
+  .pipe(takeUntil(this.unsubscribed))
+  .subscribe(
+                (data) => { },
+                (err) => {console.log(err);
+                }
+              );
+  this.currentUser = [];
 }
 }

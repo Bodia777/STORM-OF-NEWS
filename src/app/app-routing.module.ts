@@ -12,7 +12,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 const routes: Routes = [
   { path: '', redirectTo: 'registration', pathMatch: 'full' },
   { path: 'registration', component: EnterComponent },
-  { path: 'profile', component: ProfileComponent },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'news', component: NewsRouterComponent,
    canActivate: [AuthGuard],
   children: [

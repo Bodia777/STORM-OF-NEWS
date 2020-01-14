@@ -23,6 +23,7 @@ import { NewsRouterComponent } from './components/news/news-router/news-router.c
 import { SafePipe } from './components/news/news-item/item-details/item-details.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProfileComponent } from './components/profile/profile.component';
+import { SearchPipe } from './pipes/search.pipe';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     NewsItemComponent,
     ItemDetailsComponent,
     NewsRouterComponent,
-    ProfileComponent
+    ProfileComponent,
+    SearchPipe
   ],
   imports: [
     BrowserModule,

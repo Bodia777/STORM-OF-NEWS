@@ -163,7 +163,6 @@ export class ModalRegistrationComponent implements OnInit, OnDestroy {
       // tslint:disable-next-line: forin
       this.stormNewsService.currentUser[0] = Object.assign(this.regisrtrationForm.value, );
       this.stormNewsService.putChangesUserArr();
-      console.log(this.stormNewsService.currentUser);
       this.dialogRef.close();
       this.stormNewsService.changeProfileChecker = false;
     // tslint:disable-next-line: max-line-length && tslint:disable-next-line: no-string-literal
@@ -180,19 +179,19 @@ export class ModalRegistrationComponent implements OnInit, OnDestroy {
               this.regisrtrationForm.controls['userLogin'].setValue(this.stormNewsService.currentUser[0].userLogin);
               // tslint:disable-next-line: no-unused-expression
               this.stormNewsService.changeProfileChecker = false;
+              console.log(this.stormNewsService.currentUser[0].userLogin);
               break;
             } else {
               // tslint:disable-next-line: forin && tslint:disable-next-line: no-shadowed-variable
                 this.stormNewsService.currentUser[0] = Object.assign(this.regisrtrationForm.value, );
                 this.stormNewsService.putChangesUserArr();
-                console.log(this.stormNewsService.currentUser);
                 // tslint:disable-next-line: no-unused-expression
                 this.stormNewsService.changeProfileChecker = false;
                 this.dialogRef.close();
                 }
             }
           },
-        (err) => {console.log(err); }
+        (err) => {console.log('userarr doesn\'t response'); }
       );
     }
 }
@@ -206,37 +205,59 @@ export class ModalRegistrationComponent implements OnInit, OnDestroy {
     }
 }
   checkLoginRepeat() {
-    // tslint:disable-next-line: no-string-literal
-    if (this.stormNewsService.currentUser[0].userLogin === this.regisrtrationForm.controls['userLogin'].value) {
-    } else {
-    // tslint:disable-next-line: forin
-    this.stormNewsService.getUserArr()
-    .subscribe(
-      (userarr) => {
-        this.stormNewsService.userArr = userarr.slice();
-        for (const key in this.stormNewsService.userArr) {
+    if (this.stormNewsService.changeProfileChecker === false) {
+      this.loginCheckFunction();
+        } else {
           // tslint:disable-next-line: no-string-literal
-          if (this.stormNewsService.userArr[key].userLogin === this.regisrtrationForm.controls['userLogin'].value) {
-            const dialogRef3 = this.dialog3.open(ModalLoginCheckComponent, {
-              data: {
-                choseTextInModalCheckComponent: 'This login has already exist!'
-              }
-            });
-            dialogRef3.afterClosed().subscribe(result => {});
-            // tslint:disable-next-line: no-string-literal
-            if (this.stormNewsService.changeProfileChecker === false) {
-            // tslint:disable-next-line: no-string-literal
-            this.regisrtrationForm.controls['userLogin'].setValue('');
-            } else { }
-          }
+      if (this.stormNewsService.currentUser[0].userLogin === this.regisrtrationForm.controls['userLogin'].value) {
+    } else {
+    this.loginCheckFunction();
         }
-    },
-      (err) => {console.log(err); }
-    );
   }
 }
+
 cancel() {
   this.stormNewsService.changeProfileChecker = false;
 }
-}
 
+loginCheckFunction(): void {
+  this.stormNewsService.getUserArr()
+  .pipe(takeUntil(this.unsubscribed))
+  .subscribe(
+    (userarr) => {
+      this.stormNewsService.userArr = userarr.slice();
+      for (const key in this.stormNewsService.userArr) {
+        // tslint:disable-next-line: no-string-literal
+        if (this.stormNewsService.userArr[key].userLogin === this.regisrtrationForm.controls['userLogin'].value) {
+          this.modalChangeTextFunction();
+           // tslint:disable-next-line: no-string-literal
+          if (this.stormNewsService.changeProfileChecker === false) {
+          this.regisrtrationForm.controls.userLogin.setValue('');
+          } else {
+            // tslint:disable-next-line: no-string-literal
+            this.regisrtrationForm.controls['userLogin'].setValue(this.stormNewsService.currentUser[0].userLogin);
+          }
+          } else { }
+        }
+  },
+    (err) => {console.log('userarr doesn\'t response'); }
+  );
+}
+modalChangeTextFunction(): void {
+  if ( this.stormNewsService.changeProfileChecker === false ) {
+    const dialogRef3 = this.dialog3.open(ModalLoginCheckComponent, {
+      data: {
+        choseTextInModalCheckComponent: 'This login has already exist!'
+      }
+    });
+    dialogRef3.afterClosed().subscribe(result => {});
+     } else {
+    const dialogRef3 = this.dialog3.open(ModalLoginCheckComponent, {
+        data: {
+         choseTextInModalCheckComponent: 'This login has already exist! Login hasn\'t changed'
+      }
+    });
+    dialogRef3.afterClosed().subscribe(result => {});
+}
+}
+}

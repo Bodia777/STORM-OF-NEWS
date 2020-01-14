@@ -1,6 +1,5 @@
 import { Component, OnInit, AfterContentInit } from '@angular/core';
 import { StormNewsService } from 'src/app/services/storm-news.service';
-
 @Component({
   selector: 'app-news',
   templateUrl: './news.component.html',
@@ -10,18 +9,30 @@ export class NewsComponent implements OnInit, AfterContentInit {
 constructor(public stormNewsService: StormNewsService) { }
   newsArrTaker = [];
 
-  ngOnInit() {  }
+  ngOnInit() { }
 
   ngAfterContentInit() {
     this.showNews();
   }
   async showNews() {
-    const url = `https://newsapi.org/v2/${this.stormNewsService.newsSource.typeOfNews}` +
-    // `country = ${this.stormNewsService.newsSource.countrySelect}&` + `category = ${this.stormNewsService.newsSource.categorySelect}&` +
-    `q=apple&from=2019-12-23&` +
-    'apiKey=bcac83edc8f44bbeb1a0118b3b622b4d';
-    console.log(url);
-
+    const word = 'a' || 'а';
+    let url;
+    if (!this.stormNewsService.newsSource.typeOfNews) {
+      url = `https://newsapi.org/v2/top-headlines?sources=google-news&apiKey=bcac83edc8f44bbeb1a0118b3b622b4d`;
+    }
+    if (this.stormNewsService.newsSource.typeOfNews === 'top-headlines?') {
+    // tslint:disable-next-line: max-line-length
+    url = `https://newsapi.org/v2/${this.stormNewsService.newsSource.typeOfNews}` + `q=${this.stormNewsService.newsSource.controlWord}&` + `from=${this.stormNewsService.newsSource.dateFrom}&` + `to=${this.stormNewsService.newsSource.dateTo}&` + `country=${this.stormNewsService.newsSource.countrySelect}&` + `category=${this.stormNewsService.newsSource.categorySelect}&` + 'apiKey=bcac83edc8f44bbeb1a0118b3b622b4d';
+    // tslint:disable-next-line: max-line-length
+    } else if (this.stormNewsService.newsSource.typeOfNews === 'everything?' && (this.stormNewsService.newsSource.controlWord === '' || this.stormNewsService.newsSource.controlWord === ' ')) {
+    // tslint:disable-next-line: max-line-length
+    url = `https://newsapi.org/v2/${this.stormNewsService.newsSource.typeOfNews}` + `q=${word}&` + `from=${this.stormNewsService.newsSource.dateFrom}&` + `to=${this.stormNewsService.newsSource.dateTo}&` + `language=${this.stormNewsService.newsSource.languageSelect}&` +
+    `sortBy=${this.stormNewsService.newsSource.sortBy}&` + 'apiKey=bcac83edc8f44bbeb1a0118b3b622b4d';
+    } else {
+      // tslint:disable-next-line: max-line-length
+      url = `https://newsapi.org/v2/${this.stormNewsService.newsSource.typeOfNews}` + `q=${this.stormNewsService.newsSource.controlWord}&` + `from=${this.stormNewsService.newsSource.dateFrom}&` + `to=${this.stormNewsService.newsSource.dateTo}&` + `language=${this.stormNewsService.newsSource.languageSelect}&` +
+      `sortBy=${this.stormNewsService.newsSource.sortBy}&` + 'apiKey=bcac83edc8f44bbeb1a0118b3b622b4d';
+    }
     const req = new Request(url);
     // tslint:disable-next-line: only-arrow-functions
     const response = await fetch(req);

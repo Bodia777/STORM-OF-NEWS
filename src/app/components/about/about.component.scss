@@ -1,10 +1,20 @@
 .container{
-    background-color: rgb(202, 202, 197);
+    position: fixed;
+    background-image: url(/assets/img/aboutImg.jpg);
     padding: 10vh;
     width: 100vw;
-    height: 90vh;
+    height: 100vh;
+    background-size: 100% 100%;
+    margin-top: -10vh;
+    z-index: -5;
+    overflow: hidden;
 }
-h2{
-    font-style: italic;
-    color: black
+.author{
+    color: black;
+    font-size: 4rem;
+    text-shadow: 5px 2px 3px grey;
+    font-weight: bold;
+}
+.name{
+    margin-top: 20vh;
 }
